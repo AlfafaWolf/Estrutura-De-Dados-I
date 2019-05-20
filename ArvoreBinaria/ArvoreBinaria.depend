@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1556278716 source:c:\devc\arvorebinaria\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tadArbin_c.c"
+
+1556278923 c:\devc\arvorebinaria\tadarbin_c.c
+	"tadArbin_h.h"
+
+1556278144 c:\devc\arvorebinaria\tadarbin_h.h
+	<stdio.h>
+
+1556927404 source:c:\users\gabri\desktop\arvorebinaria\arvorebinaria\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tadArbin_c.c"
+
+1556927528 c:\users\gabri\desktop\arvorebinaria\arvorebinaria\tadarbin_c.c
+	"tadArbin_h.h"
+
+1556926350 c:\users\gabri\desktop\arvorebinaria\arvorebinaria\tadarbin_h.h
+	<stdio.h>
+
+1557148674 source:c:\devc\arvorebinaria\arvorebinaria\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tadArbin_c.c"
+
+1557148700 c:\devc\arvorebinaria\arvorebinaria\tadarbin_c.c
+	"tadArbin_h.h"
+
+1557147498 c:\devc\arvorebinaria\arvorebinaria\tadarbin_h.h
+	<stdio.h>
+
