@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1558319866 source:c:\users\gabri\documents\github\estrutura-de-dados-i\arvoreavl\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
