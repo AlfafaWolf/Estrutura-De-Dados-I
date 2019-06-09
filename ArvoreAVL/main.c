@@ -12,7 +12,6 @@
  *     https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
  */
 
-// C program to insert a node in AVL tree
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,7 +21,7 @@
 typedef char TipoAVL[MAX_CHAR];
 
 // Nodo da Árvore AVL
-struct NodoAVL
+typedef struct NodoAVL
 {
     TipoAVL info;
     struct NodoAVL *esq;
@@ -44,13 +43,17 @@ int max(int a, int b)
     return (a > b)? a : b;
 }
 
+ArvAVL inicArvAVL()
+{
+    return NULL;
+}
+
 /* Helper function that allocates a new node with the given key and
     NULL left and right pointers. */
-struct NodoAVL* newNode(TipoAVL elem)
+ArvAVL newNode(TipoAVL elem)
 {
-    struct NodoAVL* node = (struct NodoAVL*)
-                        malloc(sizeof(struct NodoAVL));
-    strcpy(node->info, elem); //node->info   = elem;
+    ArvAVL node = (ArvAVL) malloc(sizeof(struct NodoAVL));
+    strcpy(node->info, elem);
     node->esq    = NULL;
     node->dir    = NULL;
     node->altura = 0;  // new node is initially added at leaf
@@ -59,18 +62,18 @@ struct NodoAVL* newNode(TipoAVL elem)
 
 // A utility function to right rotate subtree rooted with y
 // See the diagram given above.
-struct NodoAVL *rightRotate(struct NodoAVL *y)
+ArvAVL rotacaoDir(ArvAVL y)
 {
-    struct NodoAVL *x  = y->esq;
-    struct NodoAVL *T2 = x->dir;
+    ArvAVL x  = y->esq;
+    ArvAVL T2 = x->dir;
 
     // Perform rotation
     x->dir = y;
     y->esq = T2;
 
     // Update heights
-    y->altura = max(altura(y->esq), altura(y->dir));
-    x->altura = max(altura(x->esq), altura(x->dir));
+    y->altura = max(altura(y->esq), altura(y->dir)) + 1;
+    x->altura = max(altura(x->esq), altura(x->dir)) + 1;
 
     // Return new root
     return x;
@@ -78,106 +81,106 @@ struct NodoAVL *rightRotate(struct NodoAVL *y)
 
 // A utility function to left rotate subtree rooted with x
 // See the diagram given above.
-struct NodoAVL *leftRotate(struct NodoAVL *x)
+ArvAVL rotacaoEsq(ArvAVL x)
 {
-    struct NodoAVL *y  = x->dir;
-    struct NodoAVL *T2 = y->esq;
+    ArvAVL y  = x->dir;
+    ArvAVL T2 = y->esq;
 
     // Perform rotation
     y->esq = x;
     x->dir = T2;
 
     //  Update heights
-    x->altura = max(altura(x->esq), altura(x->dir));
-    y->altura = max(altura(y->esq), altura(y->dir));
+    x->altura = max(altura(x->esq), altura(x->dir)) + 1;
+    y->altura = max(altura(y->esq), altura(y->dir)) + 1;
 
     // Return new root
     return y;
 }
 
 // Get Balance factor of node N
-int getBalance(struct NodoAVL *N)
+int getBalance(ArvAVL nodo)
 {
-    if (N == NULL)
+    if (nodo == NULL)
         return 0;
-    return altura(N->esq) - altura(N->dir);
+    return altura(nodo->esq) - altura(nodo->dir);
 }
 
 // Recursive function to insert a key in the subtree rooted
 // with node and returns the new root of the subtree.
-struct NodoAVL* insert(struct NodoAVL* node, TipoAVL key)
+ArvAVL insAVL(ArvAVL nodo, TipoAVL elem)
 {
     /* 1.  Perform the normal BST insertion */
-    if (node == NULL)
-        return(newNode(key));
+    if (nodo == NULL)
+        return(newNode(elem));
 
-    if (strcmp(key, node->info) < 0)      //(key < node->info)
-        node->esq = insert(node->esq, key);
-    else if (strcmp(key, node->info) > 0) //(key > node->info)
-        node->dir = insert(node->dir, key);
+    if (strcmp(elem, nodo->info) < 0)      //(key < node->info)
+        nodo->esq = insAVL(nodo->esq, elem);
+    else if (strcmp(elem, nodo->info) > 0) //(key > node->info)
+        nodo->dir = insAVL(nodo->dir, elem);
     else // Equal keys are not allowed in BST
-        return node;
+        return nodo;
 
     /* 2. Update height of this ancestor node */
-    node->altura = max(altura(node->esq),
-                           altura(node->dir));
+    nodo->altura = 1 + max(altura(nodo->esq),
+                           altura(nodo->dir));
 
     /* 3. Get the balance factor of this ancestor
           node to check whether this node became
           unbalanced */
-    int balance = getBalance(node);
+    int balance = getBalance(nodo);
 
     // If this node becomes unbalanced, then
     // there are 4 cases
 
     // Left Left Case
-    if (balance > 1 && (strcmp(key, node->esq->info) < 0))  //(balance > 1 && key < node->esq->info)
-        return rightRotate(node);
+    if (balance > 1 && (strcmp(elem, nodo->esq->info) < 0))  //(balance > 1 && key < node->esq->info)
+        return rotacaoDir(nodo);
 
     // Right Right Case
-    if (balance < -1 && (strcmp(key, node->dir->info) > 0)) //(balance < -1 && key > node->dir->info)
-        return leftRotate(node);
+    if (balance < -1 && (strcmp(elem, nodo->dir->info) > 0)) //(balance < -1 && key > node->dir->info)
+        return rotacaoEsq(nodo);
 
     // Left Right Case
-    if (balance > 1 && (strcmp(key, node->esq->info) > 0))  //(balance > 1 && key > node->esq->info)
+    if (balance > 1 && (strcmp(elem, nodo->esq->info) > 0))  //(balance > 1 && key > node->esq->info)
     {
-        node->esq =  leftRotate(node->esq);
-        return rightRotate(node);
+        nodo->esq =  rotacaoEsq(nodo->esq);
+        return rotacaoDir(nodo);
     }
 
     // Right Left Case
-    if (balance < -1 && (strcmp(key, node->dir->info) < 0)) //(balance < -1 && key < node->dir->info)
+    if (balance < -1 && (strcmp(elem, nodo->dir->info) < 0)) //(balance < -1 && key < node->dir->info)
     {
-        node->dir = rightRotate(node->dir);
-        return leftRotate(node);
+        nodo->dir = rotacaoDir(nodo->dir);
+        return rotacaoEsq(nodo);
     }
 
     /* return the (unchanged) node pointer */
-    return node;
+    return nodo;
 }
 
-void preOrder(struct NodoAVL *root)
+void preOrder(ArvAVL raiz)
 {
-    if(root != NULL)
+    if(raiz != NULL)
     {
-        printf("%s ", root->info);
-        preOrder(root->esq);
-        preOrder(root->dir);
+        printf("%s ", raiz->info);
+        preOrder(raiz->esq);
+        preOrder(raiz->dir);
     }
 }
 
-void inOrder(struct NodoAVL *root)
+void inOrder(ArvAVL raiz)
 {
-    if(root != NULL)
+    if(raiz != NULL)
     {
-        inOrder(root->esq);
-        printf("%s ", root->info);
-        inOrder(root->dir);
+        inOrder(raiz->esq);
+        printf("%s ", raiz->info);
+        inOrder(raiz->dir);
     }
 }
 
 // Lê um arquivo TXT com 1 palavra a cada linha e a insere em uma árvore AVL
-struct NodoAVL* readFile(TipoAVL nomeArquivo, struct NodoAVL *raiz)
+ArvAVL readFile(TipoAVL nomeArquivo, ArvAVL raiz)
 {
     int i = 0;
     char C;
@@ -205,7 +208,7 @@ struct NodoAVL* readFile(TipoAVL nomeArquivo, struct NodoAVL *raiz)
                 auxiliar[i] = '\0';
                 if(auxiliar[0] != '\0')
                 {
-                   raiz = insert(raiz, auxiliar);
+                   raiz = insAVL(raiz, auxiliar);
                    printf("\tinsert('%s')\n", auxiliar); // DEBUG
                 }
                 i = 0;
@@ -216,11 +219,10 @@ struct NodoAVL* readFile(TipoAVL nomeArquivo, struct NodoAVL *raiz)
     return raiz;
 }
 
-/* Representação do trabalho*/
 int main()
 {
     /* Criar raiz da arvore AVL */
-    struct NodoAVL *raiz = NULL;
+    ArvAVL raiz = inicArvAVL();
 
     /* Arvore AVL construida com o arquivo "entrada.txt"
              C
@@ -230,7 +232,7 @@ int main()
        A    AB    E
 
        inOrder  : A AB B C D E
-       preOrder : A B AB C D E
+       preOrder : B A AB D C E
     */
 
     printf("\n> Lendo Arquivo . . .\n");
