@@ -1,6 +1,12 @@
 # depslib dependency file v1.0
-1560009642 source:c:\users\gabri\documents\github\estrutura-de-dados-i\arvoreavl\main.c
+1560105333 source:c:\users\gabri\documents\github\estrutura-de-dados-i\arvoreavl\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"arvoreAVL.c"
+
+1560110051 c:\users\gabri\documents\github\estrutura-de-dados-i\arvoreavl\arvoreavl.c
+	"arvoreAVL.h"
+
+1560106072 c:\users\gabri\documents\github\estrutura-de-dados-i\arvoreavl\arvoreavl.h
 
