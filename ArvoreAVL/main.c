@@ -23,11 +23,11 @@ int main()
     ArvAVL raiz = inicArvAVL();
 
     /* Arvore AVL construida com o arquivo "entrada.txt"
-             C
-           /   \
-          B     D
-        /  \     \
-       A    AB    E
+             B
+          /     \
+         A       D
+          \     / \
+          AB   C   E
 
        inOrder  : A AB B C D E
        preOrder : B A AB D C E
