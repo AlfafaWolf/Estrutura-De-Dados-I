@@ -8,6 +8,7 @@
 #define _TAD_Arbin_H
 
 #include <stdio.h>
+#include <limits.h>
 
 /*=============================*/
 /* ====== • TAD Arbin • ====== */
@@ -96,5 +97,43 @@ int contNivel(Arbin a, int nivel);
  *  Retorna o número de elementos de uma Arbin em um determinado nível
  */
 int iguaisArbin(Arbin a, Arbin b);
+
+/*
+ *  Verificar se duas Arbin a1 e a2 são isomorfas
+ */
+int isomorfos(Arbin a1, Arbin a2);
+
+/*
+ *  Verificar se Arbin a é completa.
+ */
+int completaArbin(Arbin a);
+
+/*
+ *  Verificar se Arbin a é cheia.
+ */
+int cheiaArbin(Arbin a);
+
+//Lista buscaCaminhoArbin(Arbin a, TipoA elem);
+
+/*
+ *  Verifica se a Arbin a2 ocorre na Arbin a1.
+ */
+int ocorreArbin(Arbin a, Arbin b);
+
+/*
+ *  Calcular o nível em que aparece o elemento elem
+ */
+int nivelArbin(Arbin a, TipoA elem);
+
+void niveisArbin(Arbin a);
+
+/*
+ *  Esta função retorna o maior elemento da Arbin a
+ *  Utilizando o caminhamento recursivo In-ordem
+ *  Obs.: Requer <limits.h>
+ */
+int maiorElementoArbin(Arbin a);
+
+int semelhantesArbin(Arbin a1, Arbin a2);
 
 #endif // _TAD_Arbin_H

@@ -32,3 +32,29 @@
 1557147498 c:\devc\arvorebinaria\arvorebinaria\tadarbin_h.h
 	<stdio.h>
 
+1560149825 source:c:\users\gabri\documents\github\estrutura-de-dados-i\arvorebinaria\main.c
+	<stdio.h>
+	<stdlib.h>
+	"fila.c"
+	"lista.c"
+	"tadArbin_c.c"
+
+1560149870 c:\users\gabri\documents\github\estrutura-de-dados-i\arvorebinaria\tadarbin_c.c
+	"tadArbin_h.h"
+
+1560149772 c:\users\gabri\documents\github\estrutura-de-dados-i\arvorebinaria\tadarbin_h.h
+	<stdio.h>
+	<limits.h>
+
+1560149502 c:\users\gabri\documents\github\estrutura-de-dados-i\arvorebinaria\fila.c
+	"fila.h"
+
+1560116474 c:\users\gabri\documents\github\estrutura-de-dados-i\arvorebinaria\fila.h
+	"tadArbin_h.h"
+
+1560148363 c:\users\gabri\documents\github\estrutura-de-dados-i\arvorebinaria\lista.c
+	"lista.h"
+
+1560149842 c:\users\gabri\documents\github\estrutura-de-dados-i\arvorebinaria\lista.h
+	"tadArbin_h.h"
+
