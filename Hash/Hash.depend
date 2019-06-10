@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1560137646 source:c:\users\gabri\documents\github\estrutura-de-dados-i\hash\main.c
+	<stdio.h>
+	<stdlib.h>
+
